@@ -10,9 +10,12 @@ RUFF_SECTION = '''
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+
+[tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
 ignore = []
 '''
+
 
 BLACK_SECTION = '''
 [tool.black]
