@@ -28,7 +28,7 @@ MYPY_SECTION = '''
 python_version = "3.11"
 strict = true
 warn_unused_configs = true
-files = ["src"]
+exclude = "(^tests/)"
 '''
 
 
