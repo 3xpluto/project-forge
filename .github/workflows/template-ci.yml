@@ -65,13 +65,14 @@ jobs:
           forge new go-api /tmp/go-api --yes --var project_name=goapi --var module=example.com/goapi
           cd /tmp/go-api
           go mod tidy
-go test ./...
+          go test ./...
       - name: Generate + test go-chi-api
         run: |
           forge new go-chi-api /tmp/go-chi-api --yes --var project_name=gochi --var module=example.com/gochi
           cd /tmp/go-chi-api
           go mod tidy
-go test ./...
+          go test ./...
+
 
   rust:
     runs-on: ubuntu-latest
