@@ -5,19 +5,20 @@ theme:
     - navigation.instant
     - navigation.tabs
     - content.code.copy
+
 nav:
-  - Home: docs/index.md
-  - Getting started: docs/getting-started.md
-  - Commands: docs/commands.md
-  - Features: docs/features.md
+  - Home: index.md
+  - Getting started: getting-started.md
+  - Commands: commands.md
+  - Features: features.md
   - Templates:
-      - Overview: docs/templates/index.md
-      - Python: docs/templates/python.md
-      - Go: docs/templates/go.md
-      - Rust: docs/templates/rust.md
-      - Node: docs/templates/node.md
+      - Overview: templates/index.md
+      - Python: templates/python.md
+      - Go: templates/go.md
+      - Rust: templates/rust.md
+      - Node: templates/node.md
   - Authoring:
-      - Template quickstart: docs/authoring/quickstart.md
-      - Template manifest: docs/authoring/template-manifest.md
-      - Feature plugins: docs/authoring/feature-plugins.md
-      - Style guide: docs/authoring/style-guide.md
+      - Template quickstart: authoring/quickstart.md
+      - Template manifest: authoring/template-manifest.md
+      - Feature plugins: authoring/feature-plugins.md
+      - Style guide: authoring/style-guide.md
