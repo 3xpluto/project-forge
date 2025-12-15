@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "vars": {
+    "project_name": {"prompt": "Project name", "default": "my-express-api", "regex": "[a-zA-Z0-9_-]{2,64}"},
+    "package_name": {"prompt": "NPM package name", "default": "my-express-api"},
+    "author": {"prompt": "Author", "default": "you"},
+    "description": {"prompt": "Description", "default": "An Express API service"}
+  },
+  "files": [
+    {"src": "README.md.j2", "dst": "README.md.j2", "mode": "text"},
+    {"src": "package.json.j2", "dst": "package.json.j2", "mode": "text"},
+    {"src": "tsconfig.json.j2", "dst": "tsconfig.json.j2", "mode": "text"},
+    {"src": "src/app.ts.j2", "dst": "src/app.ts.j2", "mode": "text"},
+    {"src": "src/server.ts.j2", "dst": "src/server.ts.j2", "mode": "text"},
+    {"src": "test/health.test.ts.j2", "dst": "test/health.test.ts.j2", "mode": "text"},
+    {"src": ".gitignore.j2", "dst": ".gitignore.j2", "mode": "text"}
+  ]
+}

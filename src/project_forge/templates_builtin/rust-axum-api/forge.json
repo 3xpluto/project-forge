@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "vars": {
+    "project_name": {"prompt": "Crate name", "default": "myapi", "regex": "[a-zA-Z0-9_-]{2,64}"},
+    "author": {"prompt": "Author", "default": "you"},
+    "description": {"prompt": "Description", "default": "A small Axum service"}
+  },
+  "files": [
+    {"src": "README.md.j2", "dst": "README.md.j2", "mode": "text"},
+    {"src": "Cargo.toml.j2", "dst": "Cargo.toml.j2", "mode": "text"},
+    {"src": "src/lib.rs.j2", "dst": "src/lib.rs.j2", "mode": "text"},
+    {"src": "src/main.rs.j2", "dst": "src/main.rs.j2", "mode": "text"},
+    {"src": "tests/health.rs.j2", "dst": "tests/health.rs.j2", "mode": "text"}
+  ]
+}

@@ -1,0 +1,41 @@
+from __future__ import annotations
+
+from fastapi import Depends, FastAPI
+from pydantic import BaseModel
+from sqlalchemy import select
+from sqlalchemy.orm import Session
+
+from .db import engine, get_db
+from .models import Base, Item
+
+app = FastAPI(title="{{ project_name }}")
+
+# Simple "migrations": create tables on startup.
+# For real production use, you can layer Alembic on top.
+@app.on_event("startup")
+def _startup() -> None:
+    Base.metadata.create_all(bind=engine)
+
+@app.get("/health")
+def health() -> dict[str, str]:
+    return {"status": "ok"}
+
+class ItemIn(BaseModel):
+    name: str
+
+class ItemOut(BaseModel):
+    id: int
+    name: str
+
+@app.post("/items", response_model=ItemOut)
+def create_item(payload: ItemIn, db: Session = Depends(get_db)) -> ItemOut:
+    it = Item(name=payload.name)
+    db.add(it)
+    db.commit()
+    db.refresh(it)
+    return ItemOut(id=it.id, name=it.name)
+
+@app.get("/items", response_model=list[ItemOut])
+def list_items(db: Session = Depends(get_db)) -> list[ItemOut]:
+    rows = db.execute(select(Item)).scalars().all()
+    return [ItemOut(id=r.id, name=r.name) for r in rows]

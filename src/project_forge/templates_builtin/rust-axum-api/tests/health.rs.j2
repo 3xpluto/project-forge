@@ -1,0 +1,13 @@
+use axum::{body::Body, http::Request};
+use tower::util::ServiceExt; // for `oneshot`
+
+#[tokio::test]
+async fn health_is_ok() {
+    let app = {{ project_name }}::router();
+    let resp = app
+        .oneshot(Request::builder().uri("/health").body(Body::empty()).unwrap())
+        .await
+        .unwrap();
+
+    assert_eq!(resp.status().as_u16(), 200);
+}

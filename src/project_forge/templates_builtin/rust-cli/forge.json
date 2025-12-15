@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "vars": {
+    "project_name": {"prompt": "Crate name", "default": "mycli", "regex": "[a-zA-Z0-9_-]{2,64}"},
+    "author": {"prompt": "Author", "default": "you"},
+    "description": {"prompt": "Description", "default": "A small Rust CLI tool"}
+  },
+  "files": [
+    {"src": "README.md.j2", "dst": "README.md.j2", "mode": "text"},
+    {"src": "Cargo.toml.j2", "dst": "Cargo.toml.j2", "mode": "text"},
+    {"src": "src/main.rs.j2", "dst": "src/main.rs.j2", "mode": "text"}
+  ]
+}

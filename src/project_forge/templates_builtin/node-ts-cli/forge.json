@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "vars": {
+    "project_name": {"prompt": "Project name", "default": "my-ts-cli", "regex": "[a-zA-Z0-9_-]{2,64}"},
+    "package_name": {"prompt": "NPM package name", "default": "my-ts-cli"},
+    "author": {"prompt": "Author", "default": "you"},
+    "description": {"prompt": "Description", "default": "A TypeScript CLI tool"}
+  },
+  "files": [
+    {"src": "README.md.j2", "dst": "README.md.j2", "mode": "text"},
+    {"src": "package.json.j2", "dst": "package.json.j2", "mode": "text"},
+    {"src": "tsconfig.json.j2", "dst": "tsconfig.json.j2", "mode": "text"},
+    {"src": "src/index.ts.j2", "dst": "src/index.ts.j2", "mode": "text"},
+    {"src": "test/smoke.test.ts.j2", "dst": "test/smoke.test.ts.j2", "mode": "text"},
+    {"src": ".gitignore.j2", "dst": ".gitignore.j2", "mode": "text"}
+  ]
+}

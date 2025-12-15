@@ -1,0 +1,22 @@
+import os
+
+from fastapi.testclient import TestClient
+
+# Force sqlite db for tests
+os.environ["DATABASE_URL"] = "sqlite:///./test.db"
+
+from {{ package }}.main import app  # noqa: E402
+
+def test_items_crud(tmp_path):
+    c = TestClient(app)
+
+    r = c.post("/items", json={"name": "apple"})
+    assert r.status_code == 200
+    data = r.json()
+    assert data["name"] == "apple"
+    assert isinstance(data["id"], int)
+
+    r = c.get("/items")
+    assert r.status_code == 200
+    items = r.json()
+    assert any(i["name"] == "apple" for i in items)

@@ -1,0 +1,12 @@
+use axum::{routing::get, Json, Router};
+use serde::Serialize;
+
+#[derive(Serialize)]
+struct Health {
+    status: &'static str,
+}
+
+/// Build the HTTP router (useful for tests and embedding).
+pub fn router() -> Router {
+    Router::new().route("/health", get(|| async { Json(Health { status: "ok" }) }))
+}

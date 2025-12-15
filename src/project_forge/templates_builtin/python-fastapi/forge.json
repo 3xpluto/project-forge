@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "vars": {
+    "project_name": {"prompt": "Project name", "default": "my-api", "regex": "[a-zA-Z0-9_-]{2,64}"},
+    "package": {"prompt": "Python package (import name)", "default": "app", "regex": "[a-zA-Z_][a-zA-Z0-9_]{1,64}"},
+    "author": {"prompt": "Author", "default": "you"},
+    "description": {"prompt": "Description", "default": "A small FastAPI service"}
+  },
+  "files": [
+    {"src": "README.md.j2", "dst": "README.md.j2", "mode": "text"},
+    {"src": "pyproject.toml.j2", "dst": "pyproject.toml.j2", "mode": "text"},
+    {"src": ".gitignore.j2", "dst": ".gitignore.j2", "mode": "text"},
+    {"src": "src/{{ package }}/main.py.j2", "dst": "src/{{ package }}/main.py.j2", "mode": "text"},
+    {"src": "src/{{ package }}/__init__.py.j2", "dst": "src/{{ package }}/__init__.py.j2", "mode": "text"},
+    {"src": "tests/test_health.py.j2", "dst": "tests/test_health.py.j2", "mode": "text"}
+  ]
+}

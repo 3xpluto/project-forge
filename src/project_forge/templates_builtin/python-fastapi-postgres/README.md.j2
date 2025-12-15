@@ -1,0 +1,30 @@
+# {{ project_name }}
+
+{{ description }}
+
+- `/health` endpoint
+- `/items` CRUD example
+- Postgres-ready via `DATABASE_URL` (defaults to SQLite for local/dev)
+
+## Run
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e .
+uvicorn {{ package }}.main:app --reload
+```
+
+## Database
+
+SQLite (default):
+
+```bash
+export DATABASE_URL="sqlite:///./dev.db"
+```
+
+Postgres example:
+
+```bash
+export DATABASE_URL="postgresql+psycopg://user:pass@localhost:5432/{{ project_name }}"
+```

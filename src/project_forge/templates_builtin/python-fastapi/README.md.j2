@@ -1,0 +1,14 @@
+# {{ project_name }}
+
+{{ description }}
+
+## Run
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e .
+uvicorn {{ package }}.main:app --reload
+```
+
+Health check: `GET /health`

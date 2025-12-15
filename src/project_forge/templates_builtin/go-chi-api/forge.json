@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "vars": {
+    "project_name": {"prompt": "Project name", "default": "go-chi-api", "regex": "[a-zA-Z0-9_-]{2,64}"},
+    "module": {"prompt": "Go module path (e.g. github.com/user/repo)", "default": "example.com/go-chi-api"},
+    "author": {"prompt": "Author", "default": "you"}
+  },
+  "files": [
+    {"src": "README.md.j2", "dst": "README.md.j2", "mode": "text"},
+    {"src": "go.mod.j2", "dst": "go.mod.j2", "mode": "text"},
+    {"src": "main.go.j2", "dst": "main.go.j2", "mode": "text"},
+    {"src": "main_test.go.j2", "dst": "main_test.go.j2", "mode": "text"}
+  ]
+}

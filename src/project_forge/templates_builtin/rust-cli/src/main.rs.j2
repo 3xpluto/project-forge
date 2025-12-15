@@ -1,0 +1,16 @@
+use anyhow::Result;
+use clap::Parser;
+
+#[derive(Parser, Debug)]
+#[command(name = "{{ project_name }}", version, about = "{{ description }}")]
+struct Args {
+    /// Who to greet
+    #[arg(long, default_value = "world")]
+    hello: String,
+}
+
+fn main() -> Result<()> {
+    let args = Args::parse();
+    println!("hello, {}", args.hello);
+    Ok(())
+}

@@ -1,0 +1,122 @@
+name: Template CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Forge
+        run: |
+          python -m pip install -U pip
+          pip install -e .
+      - name: Generate + test python-cli + features
+        run: |
+          forge new python-cli /tmp/python-cli --yes --var project_name=pythoncli --var package=pythoncli
+          forge add python-quality /tmp/python-cli
+          forge add release-python-pypi /tmp/python-cli
+          cd /tmp/python-cli
+          python -m pip install -U pip
+          pip install -e ".[dev]" || pip install -e .
+          ruff check .
+          black --check .
+          mypy .
+          pytest -q
+          test -f .github/workflows/release.yml
+      - name: Generate + test python-fastapi
+        run: |
+          forge new python-fastapi /tmp/python-fastapi --yes --var project_name=pythonfastapi --var package=app
+          cd /tmp/python-fastapi
+          python -m pip install -U pip
+          pip install -e .
+          pip install pytest
+          pytest -q
+      - name: Generate + test python-fastapi-postgres
+        run: |
+          forge new python-fastapi-postgres /tmp/python-fastapi-postgres --yes --var project_name=pythonfastapipg --var package=app
+          cd /tmp/python-fastapi-postgres
+          python -m pip install -U pip
+          pip install -e .
+          pip install pytest
+          pytest -q
+
+  go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+      - name: Install Forge
+        run: |
+          python -m pip install -U pip
+          pip install -e .
+      - name: Generate + test go-api
+        run: |
+          forge new go-api /tmp/go-api --yes --var project_name=goapi --var module=example.com/goapi
+          cd /tmp/go-api
+          go test ./...
+      - name: Generate + test go-chi-api
+        run: |
+          forge new go-chi-api /tmp/go-chi-api --yes --var project_name=gochi --var module=example.com/gochi
+          cd /tmp/go-chi-api
+          go test ./...
+
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install Forge
+        run: |
+          python -m pip install -U pip
+          pip install -e .
+      - name: Generate + test rust-cli
+        run: |
+          forge new rust-cli /tmp/rust-cli --yes --var project_name=rustcli
+          cd /tmp/rust-cli
+          cargo test
+      - name: Generate + test rust-axum-api
+        run: |
+          forge new rust-axum-api /tmp/rust-axum-api --yes --var project_name=rustaxum
+          cd /tmp/rust-axum-api
+          cargo test
+
+  node:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install Forge
+        run: |
+          python -m pip install -U pip
+          pip install -e .
+      - name: Generate + test node-ts-cli
+        run: |
+          forge new node-ts-cli /tmp/node-ts-cli --yes --var project_name=nodetscli --var package_name=nodetscli
+          cd /tmp/node-ts-cli
+          npm install
+          npm test
+      - name: Generate + test node-express-api
+        run: |
+          forge new node-express-api /tmp/node-express-api --yes --var project_name=nodeexpress --var package_name=nodeexpress
+          cd /tmp/node-express-api
+          npm install
+          npm test
