@@ -2,11 +2,13 @@ from __future__ import annotations
 
 import argparse
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(prog="{{ project_name }}")
     parser.add_argument("--hello", default="world")
     args = parser.parse_args()
     print(f"hello, {args.hello}")
+
 
 if __name__ == "__main__":
     main()
